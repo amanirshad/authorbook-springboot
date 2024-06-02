@@ -35,6 +35,14 @@ public final class TestDataUtils {
                 .age(44)
                 .build();
     }
+
+    public static AuthorDto createTestAuthorDtoB() {
+        return AuthorDto.builder()
+                .id(2L)
+                .name("Thomas Cronin")
+                .age(44)
+                .build();
+    }
     public static AuthorEntity createTestAuthorC() {
         return AuthorEntity.builder()
                 .id(3L)
