@@ -5,6 +5,8 @@ import com.amanirshad.authorbook.domain.dto.AuthorDto;
 import com.amanirshad.authorbook.domain.entities.AuthorEntity;
 import com.amanirshad.authorbook.mappers.Mapper;
 import com.amanirshad.authorbook.services.AuthorService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -33,10 +35,11 @@ public class AuthorController {
     }
 
     @GetMapping(path = "/authors")
-    public List<AuthorDto> listAuthors() {
-        List<AuthorEntity> authors = authorService.findAll();
-        return authors.stream().
-                map(authorMapper::mapTo).collect(Collectors.toList());
+    public Page<AuthorDto> listAuthors(Pageable pageable) {
+        Page<AuthorEntity> authors = authorService.findAll(pageable);
+//        return authors.stream().
+//                map(authorMapper::mapTo).collect(Collectors.toList());
+        return authors.map(authorMapper::mapTo);
     }
 
     @GetMapping(path = "/authors/{id}")
